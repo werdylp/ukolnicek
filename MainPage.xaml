@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ukolnicek.MainPage">
+
+    <ScrollView>
+        <Grid ColumnDefinitions="*,*">
+            <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center"
+            Grid.Column="0">
+                <HorizontalStackLayout>
+                    <Label Text="název"></Label>
+                    <Entry x:Name="nazev" WidthRequest="150"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="termín"/>
+                    <DatePicker x:Name="dat" WidthRequest="150"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="průběh"/>
+                    <Picker x:Name="pru" WidthRequest="150">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Zadáno</x:String>
+                                <x:String>Rozpracováno</x:String>
+                                <x:String>Dokončeno</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </HorizontalStackLayout>
+                <Button Text="Nový" Clicked="novy" />
+            </VerticalStackLayout>
+            
+            <Grid ColumnDefinitions="*,8*,*,8*"
+                  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*" Grid.Column="1">
+                <Label Text="Průběh" Grid.ColumnSpan="2" Grid.Row="0"/>
+                <Label Text="Termín" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0"/>
+                
+                <Label Text="Zadáno" Grid.Column="1" Grid.Row="1"
+                           Grid.RowSpan="1"/>
+                <Label Text="Rozpracováno" Grid.Column="1" Grid.Row="3"
+                           Grid.RowSpan="1"/>
+                <Label Text="Splněno" Grid.Column="1" Grid.Row="5"
+                           Grid.RowSpan="1"/>
+                <Label Text="Od" Grid.Column="2" Grid.Row="1"
+                           Grid.RowSpan="1"/>
+                <Label Text="Do" Grid.Column="2" Grid.Row="4"
+                           Grid.RowSpan="3"/>
+                <DatePicker Grid.Column="3" Grid.Row="1"
+                                Grid.RowSpan="3"/>
+                <DatePicker Grid.Column="3" Grid.Row="3"
+                                Grid.RowSpan="3"/>
+
+
+                <CheckBox Grid.Column="0" Grid.Row="0"
+                              Grid.RowSpan="3"/>
+                <CheckBox Grid.Column="0" Grid.Row="2"
+                              Grid.RowSpan="2"/>
+                <CheckBox Grid.Column="0" Grid.Row="4"
+                              Grid.RowSpan="2"/>
+
+                <ListView x:Name="vypis"
+                          ItemsSource="{Binding Seznam}"
+                          Grid.Column="0" Grid.ColumnSpan="4"
+                          Grid.Row="7" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <HorizontalStackLayout>
+                                <Label Text="{Binding Nazev} "/>
+                                <Label Text="{Binding Termin} "/>
+                                <Label Text="{Binding Prubeh} "/>
+                                </HorizontalStackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </Grid>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>
